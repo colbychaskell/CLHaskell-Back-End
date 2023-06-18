@@ -13,9 +13,11 @@ app.use(cors())
 
 app.post('/api/contact', api.processContactForm);
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Server Error!');
+app.use(api.handleError);
+
+process.on("uncaughtException", (err) => {
+  console.error("UNCAUGHT EXCEPTION\n", err.stack);
+  process.exit(1);
 });
 
 function startServer(port) {

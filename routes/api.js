@@ -2,6 +2,11 @@ const db = require('../db')
 const {credentials} = require('../config.js');
 const emailService = require('../lib/email.js')(credentials);
 
+exports.handleError = (err, req, res, next) => {
+  console.error(err.stack);
+  res.json({success: false, message: err.message});
+};
+
 const sendMail = (name, email, message, topic) => {
   // Send confirmation email
   emailService.send(
