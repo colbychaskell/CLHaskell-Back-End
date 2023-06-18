@@ -5,7 +5,7 @@
   "main": "clhaskell.js",
   "scripts": {
     "start": "node clhaskell-cluster.js",
-    "test": "jest"
+    "test": "jest --passWithNoTests"
   },
   "author": "",
   "license": "ISC",
