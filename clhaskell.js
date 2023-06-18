@@ -1,5 +1,6 @@
 const express = require('express');
 const {credentials} = require('./config.js');
+const cors = require('cors')
 const emailService = require('./lib/email.js')(credentials);
 const bodyParser = require('body-parser');
 require('./db')
@@ -8,6 +9,7 @@ const api = require('./routes/api.js');
 const app = express();
 
 app.use(bodyParser.json());
+app.use(cors())
 
 app.post('/api/contact', api.processContactForm);
 
