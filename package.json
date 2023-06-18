@@ -4,12 +4,15 @@
   "description": "clhaskellelectric.com backend",
   "main": "clhaskell.js",
   "scripts": {
+    "start": "nodemon clhaskell.js",
     "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "nodemailer": "^6.9.3"
+    "mongoose": "^7.2.4",
+    "nodemailer": "^6.9.3",
+    "nodemon": "^2.0.22"
   }
 }
