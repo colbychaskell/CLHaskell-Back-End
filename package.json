@@ -5,7 +5,9 @@
   "main": "clhaskell.js",
   "scripts": {
     "start": "node clhaskell.js",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "predeploy": "npm run test",
+    "deploy": "az webapp up --sku F1 -n clhaskell-backend"
   },
   "author": "",
   "license": "ISC",
