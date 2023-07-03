@@ -27,31 +27,13 @@ exports.processContactForm = async (req, res, next) => {
   console.log(message);
   console.log(`CSRF token: ${csrf}`)
 
-  console.log('Checking for last submission date...');
-
-  const lastSubmitted = await db.getDateLastSubmitted(name, email, phone)
-
-  // Contact found, check last submitted date
-  if (lastSubmitted) {
-    console.log(`Last submitted: ${lastSubmitted}`);
-    const now = new Date();
-    const diff = now - lastSubmitted;
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    if (days < 1) {
-      console.log('Last submission was less than 1 day ago.');
-      res.status(500).send({
-        success: false,
-        message: 'You have already submitted a message today.'
-      });
-      return;
-    }
-
-    console.log('Last submission was more than 1 day ago.');
-  }
-
   sendMail(name, email, message, topic);
 
   console.log('Recording submission...');
+
+  if(!name || !email || !phone || !topic || !message || !csrf) {
+    res.json({error: 'Missing required fields'});
+  }
 
   try {
     // Update last submitted date for contact
