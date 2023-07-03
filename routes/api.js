@@ -8,15 +8,17 @@ exports.handleError = (err, req, res, next) => {
 };
 
 const sendMail = (name, email, message, topic) => {
+  const fromAddress = '"C.L. Haskell & Son Inc." <clhaskell@clhaskellelectric.com>'
+
   // Send confirmation email
   emailService.send(
-      '"C.L. Haskell & Son Inc." <clhaskell@clhaskellelectric.com>', email,
+      fromAddress, email,
       'C.L. Haskell & Son Inc. Contact Form',
       `Thanks for contacting us, ${name}! We will get back to you shortly.`);
 
   // Send email to us
   emailService.send(
-      email, 'clhaskell@clhaskellelectric.com', 'C.L. Haskell & Son Inc. Contact Form',
+      fromAddress, 'clhaskell@clhaskellelectric.com', 'C.L. Haskell & Son Inc. Contact Form',
       `${topic} from ${name} <${email}>: ${message}`);
 };
 
