@@ -31,7 +31,7 @@ function startServer(port) {
 
 // Allow this module to be exported or called directly
 if (require.main == module) {
-  startServer(process.env.PORT || 443);
+  startServer(process.env.PORT || 3030 );
 } else {
   module.exports = startServer;
 }
