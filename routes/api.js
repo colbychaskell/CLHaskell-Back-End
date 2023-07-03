@@ -7,7 +7,7 @@ exports.handleError = (err, req, res, next) => {
   res.json({success: false, message: err.message});
 };
 
-const sendMail = (name, email, message, topic) => {
+const sendMail = (name, email, phone, message, topic) => {
   const fromAddress = '"C.L. Haskell & Son Inc." <clhaskell@clhaskellelectric.com>'
 
   // Send confirmation email
@@ -18,8 +18,8 @@ const sendMail = (name, email, message, topic) => {
 
   // Send email to us
   emailService.send(
-      fromAddress, 'clhaskell@clhaskellelectric.com', 'C.L. Haskell & Son Inc. Contact Form',
-      `${topic} from ${name} <${email}>: ${message}`);
+      fromAddress, 'clhaskell@clhaskellelectric.com', 'New Contact Form Submission',
+      `${topic} from ${name} <${email}, ${phone}>: ${message}`);
 };
 
 exports.processContactForm = async (req, res, next) => {
@@ -29,7 +29,7 @@ exports.processContactForm = async (req, res, next) => {
   console.log(message);
   console.log(`CSRF token: ${csrf}`)
 
-  sendMail(name, email, message, topic);
+  sendMail(name, email, phone, message, topic);
 
   console.log('Recording submission...');
 
