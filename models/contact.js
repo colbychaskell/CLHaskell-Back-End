@@ -4,8 +4,8 @@ const contactSchema = new mongoose.Schema({
   name: String,
   email: String,
   phone: String,
-  lastSubmitted: Date
+  lastSubmitted: Date,
 });
 
-const Contact = mongoose.model('Contact', contactSchema);
+const Contact = mongoose.model("Contact", contactSchema);
 module.exports = Contact;
